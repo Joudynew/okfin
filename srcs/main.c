@@ -6,7 +6,7 @@
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 23:44:21 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/23 01:22:14 by joudafke         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:11:19 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #include <readline/readline.h>
 #include <signal.h>
 #include <unistd.h>
-
-pid_t	g_signal_pid = 0;
 
 void	check_signal(int sig)
 {
@@ -45,54 +43,27 @@ char	*readline_stderr(const char *prompt)
 	return (line);
 }
 
-void	create_rand(char *str)
+int	process_tokens_and_ast(t_main_data *data)
 {
-	int		fd;
-	int		len;
-	char	buff[64 + 1];
-	int		i;
-
-	fd = open("/dev/urandom", O_RDONLY);
-	if (fd < 0)
-		return ;
-	len = 0;
-	while (len < 32)
+	data->expanded = expand_variables(data->input, data->env_list,
+			data->exit_status);
+	free(data->input);
+	data->input = data->expanded;
+	data->tokens = tokenize(data->input, 0);
+	if (!data->tokens)
 	{
-		buff[read(fd, buff, 64)] = 0;
-		i = 0;
-		while (buff[i] && len < 32)
-		{
-			if (ft_isalnum(buff[i]))
-			{
-				str[len] = buff[i];
-				++len;
-			}
-			++i;
-		}
+		ft_putendl_fd("minishell: syntax error", STDERR_FILENO);
+		free(data->input);
+		return (1);
 	}
-	str[len] = 0;
-	close(fd);
-}
-
-void	init_main_data(t_main_data *data, char **envp)
-{
-	data->input = NULL;
-	data->expanded = NULL;
-	data->tokens = NULL;
-	data->tokens_head = NULL;
-	data->ast = NULL;
-	data->env_list = create_env_list(envp);
-	data->exit_status = 0;
-	data->envp = envp;
-}
-
-void	reset_loop_data(t_main_data *data)
-{
-	data->input = NULL;
-	data->expanded = NULL;
-	data->tokens = NULL;
-	data->tokens_head = NULL;
-	data->ast = NULL;
+	data->tokens_head = data->tokens;
+	data->ast = parse_pipeline(&data->tokens);
+	if (!data->ast)
+	{
+		cleanup_shell(data->tokens_head, data->ast, data->input);
+		return (1);
+	}
+	return (0);
 }
 
 int	process_input(t_main_data *data)

@@ -1,57 +1,35 @@
-#Default Cflags used for compilation
-CFLAGS := -Wall -Wextra -MMD -g3 -fPIC
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/11 16:34:04 by joudafke          #+#    #+#              #
+#    Updated: 2024/12/21 01:26:29 by joudafke         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# Directory where are located header files
-INCLUDE_DIR := includes
+NAME = libftprintf.a
+CC = cc
+FLAGS = -Wall -Wextra -Werror
+SRCS = ft_printf.c ft_putchar.c ft_putstr.c ft_putptr.c ft_putnbr.c ft_putunbr.c ft_puthex.c
+OBJS = $(SRCS:.c=.o)
 
-# Variable that will store flags command to include headers
-INCLUDES := -I$(INCLUDE_DIR)
+all: $(NAME)
 
-OBJ_DIR := objs
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
+	
+%.o: %.c
+	$(CC) $(FLAGS) -c $< -o $@
 
-SRC_DIR := srcs
+clean:
+	rm -f $(OBJS)
 
-SRCS := $(shell find $(SRC_DIR) -name '*.c')
+fclean: clean
+	rm -f $(NAME)
 
-OBJS := $(addprefix $(OBJ_DIR)/,$(addsuffix .o,$(notdir $(basename $(SRCS)))))
-DEPEND = $(OBJS:.o=.d)
+re: fclean all
 
-# Directory where will the builded library will be stored
-LIB_FOLDER := lib
-
-# Library name
-LIB_NAME := libprintf.a
-
-# Library path
-LIB := $(LIB_FOLDER)/$(LIB_NAME)
-
-all : $(LIB)
-
-$(LIB) : $(OBJS)
-		@mkdir -p lib
-		ar rcs $@ $^
-
-# Rule to generate all object file and create OBJ_DIR if not exist
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-# Header dependencies. Adds the rules in the .d files, if they exists, in order to
-# add headers as dependencies of obj files (see .d files).
-# This rules will be merged with the previous rules.
--include $(DEPEND)
-
-$(OBJ_DIR): ; @mkdir -p $@
-
-# Removes all the build directories (objs, deps), executable and library and recreate them
-.PHONY : re
-re : fclean $(LIB)
-
-# Removes all the build directories (objs, deps), executable and library
-.PHONY : fclean
-fclean : clean
-		rm -rf $(LIB_FOLDER) $(OBJ_DIR)
-
-# Removes the obj directory
-.PHONY : clean
-clean :
-		rm -rf $(OBJ_DIR)
+.PHONY: all clean fclean re

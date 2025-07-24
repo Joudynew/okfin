@@ -6,7 +6,7 @@
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 13:19:51 by ibarbouc          #+#    #+#             */
-/*   Updated: 2025/07/23 02:02:08 by joudafke         ###   ########.fr       */
+/*   Updated: 2025/07/24 23:26:35 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,8 @@ int					ft_valid_nbr(char *str);
 
 // lexer
 t_token				*tokenize(char *input, int i);
-int					process_input_char(char *input, t_token **token_list, int i);
+int					process_input_char(char *input, t_token **token_list,
+						int i);
 
 // parser
 t_ast_node			*parse_command(t_token **token_list, t_ast_node *cmd);

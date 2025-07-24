@@ -1,57 +1,40 @@
-#Default Cflags used for compilation
-CFLAGS := -Wall -Wextra -Werror -MMD -g3 -fPIC
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/17 17:14:59 by joudafke          #+#    #+#              #
+#    Updated: 2025/07/24 23:22:34 by joudafke         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# Directory where are located header files
-INCLUDE_DIR := includes
+NAME = libft.a
+CC = cc
+FLAGS = -Wall -Wextra -Werror
+SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c free_tab.c free_list.c
+SRCS_B = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
+OBJS = $(SRCS:.c=.o)
+OBJS_B = $(SRCS_B:.c=.o)
 
-# Variable that will store flags command to include headers
-INCLUDES := -I$(INCLUDE_DIR)
+all: $(NAME)
 
-OBJ_DIR := objs
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-SRC_DIR := src
+bonus: $(OBJS_B)
+	ar rcs $(NAME) $(OBJS_B)
+	
+%.o: %.c
+	$(CC) $(FLAGS) -c $< -o $@
 
-SRCS := $(shell find $(SRC_DIR) -name '*.c')
+clean:
+	rm -f $(OBJS) $(OBJS_B)
 
-OBJS := $(addprefix $(OBJ_DIR)/,$(addsuffix .o,$(notdir $(basename $(SRCS)))))
-DEPEND = $(OBJS:.o=.d)
+fclean: clean
+	rm -f $(NAME)
 
-# Directory where will the builded library will be stored
-LIB_FOLDER := lib
+re: fclean all
 
-# Library name
-LIB_NAME := libft.a
-
-# Library path
-LIB := $(LIB_FOLDER)/$(LIB_NAME)
-
-all : $(LIB)
-
-$(LIB) : $(OBJS)
-		@mkdir -p lib
-		ar rcs $@ $^
-
-# Rule to generate all object file and create OBJ_DIR if not exist
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)
-		$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-# Header dependencies. Adds the rules in the .d files, if they exists, in order to
-# add headers as dependencies of obj files (see .d files).
-# This rules will be merged with the previous rules.
--include $(DEPEND)
-
-$(OBJ_DIR): ; @mkdir -p $@
-
-# Removes all the build directories (objs, deps), executable and library and recreate them
-.PHONY : re
-re : fclean $(LIB)
-
-# Removes all the build directories (objs, deps), executable and library
-.PHONY : fclean
-fclean : clean
-		rm -rf $(LIB_FOLDER) $(OBJ_DIR)
-
-# Removes the obj directory
-.PHONY : clean
-clean :
-		rm -rf $(OBJ_DIR)
+.PHONY: all bonus clean fclean re
