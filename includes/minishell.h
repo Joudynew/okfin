@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 13:19:51 by ibarbouc          #+#    #+#             */
-/*   Updated: 2025/07/24 23:26:35 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:43:34 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:39:52 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ char				*get_env_value(char *name, t_env *env_list);
 int					extract_var_name(char *input, int start_index,
 						char *var_name_buffer);
 int					is_valid_var_char(char c);
+void				neutralize_special_char_in_expand(char *input);
 
 // builtin
 void				exec_builtin(t_builtin_data *builtin_data);
@@ -180,6 +181,7 @@ void				reset_loop_data(t_main_data *data);
 int					process_input(t_main_data *data);
 void				create_rand(char *str);
 void				check_signal(int sig);
+int					is_special_char(char c);
 
 // redirections
 void				no_cmd_process_append(t_ast_node *append_node);

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 00:00:00 by ibarbouc          #+#    #+#             */
-/*   Updated: 2025/07/24 23:24:25 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:40:57 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:33:37 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	handle_heredoc_eof(char *delimiter, int line_number)
 
 int	write_heredoc_line(int fd_input, char *line)
 {
-	if (write(fd_input, line, strlen(line)) == -1 || write(fd_input, "\n",
+	if (write(fd_input, line, ft_strlen(line)) == -1 || write(fd_input, "\n",
 			1) == -1)
 	{
 		perror("write");

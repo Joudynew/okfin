@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibarbouc <ibarbouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 23:44:55 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/13 15:37:18 by ibarbouc         ###   ########.fr       */
+/*   Created: 2025/07/26 16:42:03 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:34:43 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_strjoin2(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	new_str = (char *)malloc(strlen(s1) + strlen(s2) + 2);
+	new_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 2);
 	if (!new_str)
 		return (NULL);
 	i = 0;

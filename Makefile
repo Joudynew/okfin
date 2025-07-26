@@ -1,6 +1,6 @@
-CC = gcc
+CC = cc
 
-CFLAGS = -Werror -Wextra -Wall -MMD -g3 -fPIC
+CFLAGS = -Werror -Wextra -Wall
 LDFLAGS = -lreadline
 
 INCLUDES = -Iincludes -I./lib/ft_printf/includes -I./lib/libft/includes

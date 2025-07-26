@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 21:00:47 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/23 01:22:14 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:41:50 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:34:10 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ size_t	quoted_word(char *input, size_t i, char *assembled_word, int *pos)
 
 	quote = input[i];
 	i++;
-	while (i < strlen(input) && input[i] != quote)
+	while (i < ft_strlen(input) && input[i] != quote)
 	{
 		assembled_word[(*pos)++] = input[i++];
 	}
-	if (i < strlen(input) && input[i] == quote)
+	if (i < ft_strlen(input) && input[i] == quote)
 		i++;
 	return (i);
 }
@@ -62,7 +62,7 @@ int	tokenize_words(char *input, t_token **token_list, size_t start_index)
 	i = start_index;
 	assembled_word = malloc(100000);
 	pos = 0;
-	while (i < strlen(input) && !is_space(input[i]) && input[i] != '|'
+	while (i < ft_strlen(input) && !is_space(input[i]) && input[i] != '|'
 		&& input[i] != '<' && input[i] != '>')
 	{
 		if (input[i] == '\'' || input[i] == '"')

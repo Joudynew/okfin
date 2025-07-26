@@ -5,11 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/23 17:33:48 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/24 18:38:08 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:40:38 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:37:52 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "parser.h"
 
 t_ast_node	*handle_word_token(t_token **token_list, t_ast_node *cmd)

@@ -5,18 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 21:30:00 by ibarbouc          #+#    #+#             */
-/*   Updated: 2025/07/24 18:50:24 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:39:46 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:38:16 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 void	execute_builtin_in_child(t_exec_data *data)
 {
@@ -48,6 +43,7 @@ void	execute_external_command(t_exec_data *data)
 		free(data->input);
 		exit(127);
 	}
+	neutralize_special_char_in_expand(data->input);
 	execve(path, data->node->args, data->envp);
 	free_in_child(data->env_list, data->first_node, path);
 	perror("execve");
@@ -87,6 +83,7 @@ int	execute_command(t_ast_node *node, t_exec_data *data)
 	pid_t	pid_cmd;
 	int		status;
 
+	status = 0;
 	if ((!node->args || !node->args[0]) && node->redirections)
 		return (no_cmd_process_redirections(node->redirections), 0);
 	if (node->args && node->args[0] && is_builtin(node->args[0])

@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifadhli <ifadhli@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 23:43:46 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/17 04:03:19 by ifadhli          ###   ########.fr       */
+/*   Created: 2025/07/26 16:39:02 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:28:31 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	neutralize_special_char_in_expand(char *input)
+{
+	int		i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (is_special_char(input[i]))
+			input[i] *= -1;
+		i++;
+	}
+}
 
 char	*expand_dollar(char *input, int *i, t_env *env_list, int exit_status)
 {
@@ -29,6 +42,7 @@ char	*expand_dollar(char *input, int *i, t_env *env_list, int exit_status)
 		return (ft_strdup(""));
 	*i += len;
 	value = get_env_value(var_name, env_list);
+	neutralize_special_char_in_expand(value);
 	if (!value)
 		return (ft_strdup(""));
 	return (ft_strdup(value));

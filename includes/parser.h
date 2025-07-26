@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibarbouc <ibarbouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 21:07:31 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/22 21:18:14 by ibarbouc         ###   ########.fr       */
+/*   Created: 2025/07/26 16:43:22 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:39:29 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <errno.h>
 # include <fcntl.h>
-# include <readline/readline.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -66,7 +65,6 @@ int						is_operator(char c);
 t_token					*create_token(t_token_type token_type, char *value);
 void					add_token(t_token **token_list, t_token *new_token);
 void					free_tokens(t_token **token_list);
-
 int						handle_input_redirections(char *input,
 							t_token **token_list, int i);
 int						handle_output_redirections(char *input,
@@ -88,11 +86,6 @@ void					free_ast(t_ast_node *node);
 t_ast_node				*parse_command(t_token **token_list, t_ast_node *cmd);
 t_ast_node				*parse_pipeline(t_token **token_list);
 void					*process_redirections(t_ast_node *redir_list);
-
-void					print_indent(int level, bool is_last, bool *branches);
-void					print_ast(t_ast_node *node, int level, bool is_last,
-							bool *branches);
-char					*ft_strdup(const char *s);
 void					cleanup_heredocs(t_ast_node *node);
 void					create_rand(char *str);
 void					check_signal(int sig);

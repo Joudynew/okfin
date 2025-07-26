@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibarbouc <ibarbouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/15 23:16:42 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/22 21:41:55 by ibarbouc         ###   ########.fr       */
+/*   Created: 2025/07/26 16:41:40 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:37:30 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include "parser.h"
 
 int	is_operator(char c)
@@ -34,7 +35,9 @@ int	ending_quotes(char *input, int start)
 t_token	*create_token(t_token_type token_type, char *value)
 {
 	t_token	*new_token;
+	int		i;
 
+	i = 0;
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
 		return (NULL);
@@ -42,7 +45,15 @@ t_token	*create_token(t_token_type token_type, char *value)
 	if (!value)
 		new_token->value = NULL;
 	else
+	{
+		while (value[i])
+		{
+			if (value[i] < 0)
+				value[i] *= -1;
+			i++;
+		}
 		new_token->value = ft_strdup(value);
+	}
 	new_token->next = NULL;
 	return (new_token);
 }

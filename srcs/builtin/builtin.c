@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 23:42:39 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/23 02:03:05 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:37:58 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:31:22 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_cd(char *path)
 		if (!path)
 			return (printf("HOME not set"), free(cwd), free(oldpwd));
 	}
-	else if (strcmp(path, "-") == 0)
+	else if (ft_strcmp(path, "-") == 0)
 		return (error_cd());
 	if (chdir(path) == -1)
 	{

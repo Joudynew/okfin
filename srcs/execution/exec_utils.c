@@ -5,18 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 21:30:00 by ibarbouc          #+#    #+#             */
-/*   Updated: 2025/07/24 18:50:44 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:40:05 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:06:41 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 void	free_in_child(t_env *env_list, t_ast_node *node, char *path)
 {

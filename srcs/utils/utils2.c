@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 21:30:47 by ibarbouc          #+#    #+#             */
-/*   Updated: 2025/07/24 19:08:02 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:42:13 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:40:31 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ void	cleanup_final(t_main_data *data)
 	clear_history();
 	rl_clear_history();
 	free_list(data->env_list);
+}
+
+int	is_special_char(char c)
+{
+	return (c == '|' || c == '&' || c == ';' || c == '>'
+		|| c == '<' || c == '\'' || c == '\"');
 }

@@ -5,18 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 23:44:21 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/24 19:11:19 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:42:33 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:07:20 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-#include <fcntl.h>
-#include <readline/history.h>
-#include <readline/readline.h>
-#include <signal.h>
-#include <unistd.h>
 
 void	check_signal(int sig)
 {

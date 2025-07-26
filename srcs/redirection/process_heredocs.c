@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/11 20:59:41 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/24 23:27:40 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:41:14 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:29:16 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	read_heredoc_lines(int fd_input, char *delimiter)
 		}
 		if (ft_strcmp(line, delimiter) == 0)
 		{
-			printf("HERE\n");
 			free(line);
 			break ;
 		}
@@ -58,7 +57,7 @@ void	process_heredoc(t_process_heredoc_data *proc_data)
 
 	if (!proc_data->heredoc_node)
 	{
-		fprintf(stderr, "Erreur: heredoc_node est NULL\n");
+		fprintf(stderr, "Erreur: heredoc_node is NULL\n");
 		return ;
 	}
 	setup_heredoc_file(proc_data->heredoc_node, rand_name);

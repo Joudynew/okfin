@@ -5,18 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/22 21:30:00 by ibarbouc          #+#    #+#             */
-/*   Updated: 2025/07/23 01:22:14 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:39:53 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:06:33 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 void	handle_pipe_child_left(t_ast_node *node, t_exec_data *data,
 		int *pipe_fd)

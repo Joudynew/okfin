@@ -5,18 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joudafke <joudafke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 19:15:42 by joudafke          #+#    #+#             */
-/*   Updated: 2025/07/24 19:12:10 by joudafke         ###   ########.fr       */
+/*   Created: 2025/07/26 16:40:11 by joudafke          #+#    #+#             */
+/*   Updated: 2025/07/26 18:06:46 by joudafke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "parser.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
 char	**get_path(t_env *env_list)
 {
